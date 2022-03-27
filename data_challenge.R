@@ -114,7 +114,7 @@ cyto_feat_model <- survival::coxph(survival::Surv(D_PFS,HR_FLAG) ~
                                      CYTO_predicted_feature_18, data=clin_data)
 summary(cyto_feat_model)
 
-## only feature 01, 03 and 14 have a significant effect (based on p-values) - look at Kaplan meier curves for these features
+## only feature 01, 03 and 14 have a significant effect (based on p-values) - plot Kaplan meier curves for these features
 fit_cyto1 = survival::survfit(survival::Surv(D_PFS,HR_FLAG)~CYTO_predicted_feature_01,data=clin_data)
 fit_cyto3 = survival::survfit(survival::Surv(D_PFS,HR_FLAG)~CYTO_predicted_feature_03,data=clin_data)
 fit_cyto14 = survival::survfit(survival::Surv(D_PFS,HR_FLAG)~CYTO_predicted_feature_14,data=clin_data)
