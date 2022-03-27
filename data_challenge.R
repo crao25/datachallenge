@@ -366,6 +366,12 @@ cv <- resample(svlearner_tune, surv.task, rdesc, measures=cindex, models=T, extr
 rforestsrc <- train(svlearner_tune, surv.task)
 getLearnerModel(rforestsrc)
 
+## performance evaluation - check c-index across 5 iterations
+c_index_df <- cv$measures.test
+
+##plot
+ggplot(c_index_df)+geom_path(aes(x=iter,y=cindex),size=1,alpha=0.8)+scale_color_manual(values=myfillcolors)
+
 ## get feature importance using the cross validation set
 imp_df_cv <- rbind(cv$extract[[1]]$res,
                    cv$extract[[2]]$res,
@@ -373,6 +379,7 @@ imp_df_cv <- rbind(cv$extract[[1]]$res,
                    cv$extract[[4]]$res,
                    cv$extract[[5]]$res)%>% dplyr::group_by(variable) %>% dplyr::summarise(mean=mean(importance), sd=sd(importance)) %>% arrange(desc(mean))
 
+## plot
 ggplot(imp_df_cv, aes(x=reorder(variable, mean), y=mean, fill=mean))+
   geom_bar(stat="identity", position="dodge")+coord_flip()+
   ylab("Variable importance")+xlab("")+ggtitle("Information Value Summary")+
