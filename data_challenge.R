@@ -455,7 +455,7 @@ saveRDS(rforestsrc, "pred_model.rds")
 ## guide to test it on an external dataset
 # load the model
 pred_model <- readRDS("pred_model.rds")
-print(super_model)
+
 # make a predictions on "new data" using the final model
 final_predictions <- predict(pred_model, validation_data)###
 
