@@ -36,7 +36,7 @@ Guideline on how to use the final model pred_model.Rds on an external dataset wi
 ```
 ## load the model
 
-pred_model <- readRDS("pred_model.rds")
+pred_model <- readRDS("pred_model.Rds")
 
 ## make predictions on validation data using the final model
 
