@@ -31,7 +31,7 @@ The final training dataset contains the following columns:
 
 Note: Entrez IDs were converted to Gene Symbols before training. The expression dataset is reshaped so that the gene symbols become column names and the patient IDs are values of a separate column and then the dataset is merged with the clinical dataset using the patient IDs. 
 
-Guideline on how to use the final model pred_model.rds on an external dataset:
+Guideline on how to use the final model pred_model.rds on an external dataset with the same features as in training dataset:
 
 ```
 ## load the model
