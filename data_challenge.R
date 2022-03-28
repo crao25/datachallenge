@@ -54,8 +54,8 @@ clin_data$agegrp <- cut(clin_data$D_Age, breaks=c(seq(20,80, by=15), Inf), label
 ## Pre-processing
 table(clin_data$HR_FLAG)
 
-## assumption: events where it is not TRUE (event did not occur) are assumed to be censored
-## 131 out of 583 events occured and rest are censored
+## assumption: events where HR_FLAG it is not TRUE (event did not occur) are assumed to be censored
+## 131 out of 583 events occurred and rest are censored
 clin_data$HR_FLAG <- clin_data$HR_FLAG==TRUE
 
 ## explore how many events occurred and how many censored
@@ -213,8 +213,17 @@ mtext(side = 1, text = "Samples", line = 4)
 mtext(side = 2, text = "Library size (millions)", line = 3)
 title("Barplot of library sizes")
 
+# examine the distributions of the raw counts using log of the counts.
+# Get log2 counts per million
+logcounts <- cpm(dge,log=TRUE)
+# Check distributions of samples using boxplots
+boxplot(logcounts, xlab="", ylab="Log2 counts per million",las=2, cex.axis=0.2)
+# Let's add a blue horizontal line that corresponds to the median logCPM
+abline(h=median(logcounts),col="blue")
+title("Boxplots of logCPMs (unnormalised)")
+
 ## multi-dimensional scaling plots
-par(mfrow=c(1,2))
+
 # set up colour schemes for age and gender
 
 col.sex <- c("purple","orange")[as.factor(clin_data$D_Gender)]
@@ -248,7 +257,7 @@ final_exp_data <- final_exp_data %>% dplyr::rename(RNASeq_transLevelExpFileSampl
 ## merge clinical and expression data
 clin_exp_merge <- merge(x=clin_data, y=final_exp_data, by="RNASeq_transLevelExpFileSamplId", all.x=T)
 
-## change column names not suitable for R
+## change column names that are not suitable for R
 clin_exp_merge <- clin_exp_merge %>% dplyr::rename(H1_4 = "H1-4")
 
 ## correlation of genes with event time
@@ -271,6 +280,7 @@ melted_cormat <- melt(upper_tri, na.rm = TRUE)
 # plot Heatmap
 ggplot(data = melted_cormat, aes(Var2, Var1, fill = value))+
   geom_tile(color = "white")+
+  geom_text(aes(label = round(value, 2)), size=1.5)+
   scale_fill_gradient2(low = "blue", high = "red", mid = "white", 
                        midpoint = 0, limit = c(-1,1), space = "Lab", 
                        name="Pearson\nCorrelation") +
