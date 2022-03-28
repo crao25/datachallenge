@@ -7,7 +7,6 @@ This repository contains the scripts to perform exploratory analysis on clinical
 4. Data_Challenge_Report.pdf: Short report to intereprt the model and the analysis results
 5. pred_model.Rds: Final model trained on entire training dataset and which can be loaded and applied on an external dataset
 
-Guidelines on how to use the model pred_model.Rds on an external validation set:
 
 The final training dataset contains the following columns:
 "D_Age", "D_PFS", "D_ISS", "CYTO_predicted_feature_01", "CYTO_predicted_feature_03", 
@@ -32,6 +31,7 @@ The final training dataset contains the following columns:
 
 Note: Entrez IDs were converted to Gene Symbols before training. The expression dataset is reshaped so that the gene symbols become column names and the patient IDs are values of a separate column and then the dataset is merged with the clinical dataset using the patient IDs. 
 
+Guideline on how to use the final model pred_model.rds on an external dataset:
 
 ```
 ##guide to test it on an external dataset
