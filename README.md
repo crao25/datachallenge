@@ -4,7 +4,7 @@ This repository contains the scripts to perform exploratory analysis on clinical
 1. data_challenge.R: R script to do exploratory and predictive analyis
 2. data_challenge.Rmd: rmarkdown script which is a replicate of the R script, however with more text and comments.
 3. data_challenge.html: Output of the rmarkdown script
-4. Data_Challenge_Report.pdf: Short report to intereprt the model and the analysis results
+4. Data_Challenge_Report.pdf: Short report to interpret the model and the analysis results
 5. pred_model.Rds: Final model trained on entire training dataset and which can be loaded and applied on an external dataset
 
 
@@ -31,14 +31,14 @@ The final training dataset contains the following columns:
 
 Note: Entrez IDs were converted to Gene Symbols before training. The expression dataset is reshaped so that the gene symbols become column names and the patient IDs are values of a separate column and then the dataset is merged with the clinical dataset using the patient IDs. 
 
-Guideline on how to use the final model pred_model.rds on an external dataset with the same features as in training dataset:
+Guideline on how to use the final model pred_model.Rds on an external dataset with the same features as in training dataset:
 
 ```
 ## load the model
 
 pred_model <- readRDS("pred_model.rds")
 
-## make a predictions on validation data using the final model
+## make predictions on validation data using the final model
 
 final_predictions <- predict(pred_model, validation_data)
 
