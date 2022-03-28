@@ -9,13 +9,26 @@ This repository contains the scripts to perform exploratory analysis on clinical
 
 Guideline on how to use the model pred_model.Rds on an external validation set:
 
+The final training dataset contains the following columns:
+"D_Age", "D_PFS", "D_ISS", "CYTO_predicted_feature_01", "CYTO_predicted_feature_03", 
+"CYTO_predicted_feature_14", "HR_FLAG", "ACTG1", "ARID1A", "ATM", 
+"BRAF", "CCND1", "CREBBP", "CSGALNACT1", "CYLD", "DIS3", "EGR1", 
+"EPAS1", "ERC2", "FGFR3", "H1_4", "HUWE1", "IRF4", "KMT2C", "KRAS", 
+"MAX", "NRAS", "NSD2", "PHF19", "PRC1", "PRKD2", "TENT5C", "TP53", 
+"TRAF3", "UBR5"
+
 * Features list: 
 1. Clinical and cytogenetic features: "D_Age", "D_ISS", "CYTO_predicted_feature_01", "CYTO_predicted_feature_03", 
 "CYTO_predicted_feature_14"
-2. Expression data features: Entrez IDs: 71, 472, 595, 673, 1387, 1540, 1958, 2034, 2261, 3008, 3662, 3845, 4149, 4893, 7157, 7187, 7468, 8289, 9055, 10075, 22894, 25865, 26059, 26147, 51366, 54855, 55790, 58508
+2. Expression data features: 
+* Entrez IDs: 71, 472, 595, 673, 1387, 1540, 1958, 2034, 2261, 3008, 3662, 3845, 4149, 4893, 7157, 7187, 7468, 8289, 9055, 10075, 22894, 25865, 26059, 26147, 51366, 54855, 55790, 58508 -> corresponding genes symbols: "ACTG1", "ARID1A", "ATM", 
+"BRAF", "CCND1", "CREBBP", "CSGALNACT1", "CYLD", "DIS3", "EGR1", 
+"EPAS1", "ERC2", "FGFR3", "H1_4", "HUWE1", "IRF4", "KMT2C", "KRAS", 
+"MAX", "NRAS", "NSD2", "PHF19", "PRC1", "PRKD2", "TENT5C", "TP53", 
+"TRAF3", "UBR5" 
 
 * Target variables: D_PFS, HR_FLAG 
 
-Note: The expression dataset is reshaped so that the Entrez IDS or the gene names become column names and the patient IDs are values of a separate column and then the dataset is merged with the clinical dataset using the patient IDs. 
+Note: Entrez IDs were converted to Gene Symbols before training. The expression dataset is reshaped so that the gene symbols become column names and the patient IDs are values of a separate column and then the dataset is merged with the clinical dataset using the patient IDs. 
 
 
