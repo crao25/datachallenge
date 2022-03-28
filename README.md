@@ -21,8 +21,8 @@ The final training dataset contains the following columns:
 1. Clinical and cytogenetic features: "D_Age", "D_ISS", "CYTO_predicted_feature_01", "CYTO_predicted_feature_03", 
 "CYTO_predicted_feature_14"
 2. Expression data features: 
-  * Entrez IDs: 71, 472, 595, 673, 1387, 1540, 1958, 2034, 2261, 3008, 3662, 3845, 4149, 4893, 7157, 7187, 7468, 8289, 9055, 10075, 22894, 25865, 26059, 26147, 51366, 54855, 55790, 58508 
-  * Corresponding gene symbols: "ACTG1", "ARID1A", "ATM", 
+  1. Entrez IDs: 71, 472, 595, 673, 1387, 1540, 1958, 2034, 2261, 3008, 3662, 3845, 4149, 4893, 7157, 7187, 7468, 8289, 9055, 10075, 22894, 25865, 26059, 26147, 51366, 54855, 55790, 58508 
+  2. Corresponding gene symbols: "ACTG1", "ARID1A", "ATM", 
 "BRAF", "CCND1", "CREBBP", "CSGALNACT1", "CYLD", "DIS3", "EGR1", 
 "EPAS1", "ERC2", "FGFR3", "H1_4", "HUWE1", "IRF4", "KMT2C", "KRAS", 
 "MAX", "NRAS", "NSD2", "PHF19", "PRC1", "PRKD2", "TENT5C", "TP53", 
