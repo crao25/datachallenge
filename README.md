@@ -34,11 +34,13 @@ Note: Entrez IDs were converted to Gene Symbols before training. The expression 
 Guideline on how to use the final model pred_model.rds on an external dataset:
 
 ```
-##guide to test it on an external dataset
-##load the model**
+## load the model
+
 pred_model <- readRDS("pred_model.rds")
-print(pred_model)
-##make a predictions on validation data using the final model
+
+## make a predictions on validation data using the final model
+
 final_predictions <- predict(pred_model, validation_data)
+
 ```
 
