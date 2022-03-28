@@ -100,7 +100,7 @@ clin_data %>% ggplot(aes(x=agegrp, color=D_Gender, fill=D_Gender))+geom_bar()+
 
 par(mfrow=c(1,2))
 
-## Kaplan-Meier curve for Death events in patients stratified by age and ISS
+## Kaplan-Meier curve for events in patients stratified by age and ISS
 surv_plots <- list()
 fit_iss=survival::survfit(survival::Surv(D_PFS,HR_FLAG)~D_ISS,data=clin_data)
 ggsurvplot(fit_iss, pval = TRUE, conf.int = TRUE)
@@ -190,7 +190,7 @@ psych::describeBy(clin_data$D_PFS,group=clin_data$D_ISS)
 The descriptive analysis of the relevant factors from the clinical data show that median PFS time is different across the different groups of features. It will be interesting to see how these features combined with expression data perform in the predictive analysis and contribute to the prediction of death or relapse risk in newly diagnosed MM patients. 
 
 ### Expression data exploration
-Next, expression dataset will be explored and later integrated with the clinical data to train a predictive model. The expression dataset is filtered for only those MM relevant genes based on literature research. Furthermore, only those samples for which clinical data is also available will be used for the further analysis. This way it becomes to easier to integrate the two datasets to build a predictive model. 
+Next, expression dataset will be explored and later integrated with the clinical data to train a predictive model. The expression dataset is filtered for only those MM relevant genes based on literature research. Furthermore, only those samples for which clinical data is also available will be used for the further analysis. This way it becomes easier to integrate the two datasets to build a predictive model. 
 
 #### 1. Prepare data 
 
@@ -250,7 +250,7 @@ dge <- DGEList(countdata)
 ```
 
 #### 2. Quality control
-Here, as I have subsetted the expression dataset for MM relevant genes, the filtering of lowly expressed genes (which is an important step in a standard RNASeq analysis pipeline), will be skipped and no differential analysis will be performed, as all the samples belong to the same group (newly diagnosed MM) and I want to include all these genes later in the prediction model. So, as next step, quality control on all the samples in the dataset will be performed to check that the data is of good quality, and that the samples are as we would expect.  
+Here, as I have subsetted the expression dataset for MM relevant genes, the filtering of lowly expressed genes (which is an important step in a standard RNASeq analysis pipeline), will be skipped. So, as next step, quality control on all the samples in the dataset will be performed to check that the data is of good quality, and that the samples are as we would expect.  
 
 ```{r qc, echo=T, message=F, warning=F, out.width="50%", fig.align="center"}
 
@@ -368,7 +368,7 @@ ggplot(data = melted_cormat, aes(Var2, Var1, fill = value))+
 
 ```
 
-The correlation of MM relevant gene expression levels with PFS are represented in the heatmap. Positive correlations are red and negative correlations are blue. The plot indicates that some genes, namely CCND1, H1_4, HUWEI, KRAS, MAX, NRAS, PHF19, PRC1, TENT5C, TP53 and UBR5 show negative correlation with PFS. It will be interesting to see if these features will appear to be important predictors and how they impact the survival risk. 
+The correlation of MM relevant gene expression levels with PFS are represented in the heatmap. Positive correlations are red and negative correlations are blue. The plot indicates that some genes, namely CCND1, H1_4, HUWE1, KRAS, MAX, NRAS, PHF19, PRC1, TENT5C, TP53 and UBR5 show negative correlation with PFS. It will be interesting to see if these features will appear to be important predictors and how they impact the survival risk. 
 
 ### Modelling
 #### 1. Feature exploration: Attribution of each predictor to the predicted risk
@@ -463,7 +463,7 @@ svlearner_tune <- setHyperPars(makeLearner("surv.randomForestSRC"), mtry=tune$x$
 
 svlearner_tune$par.vals <- list(importance=T)
 
-## resampling - to anticipate how the model might possibly perform on a new dataset
+## resampling - to anticipate how the model would perform on a new dataset
 ## the CV scheme in mlr by default makes 80/20 split of the training dataset
 cv <- resample(svlearner_tune, surv.task, rdesc, measures=cindex, models=T, extract=getFeatureImportance)
 

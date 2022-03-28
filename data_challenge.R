@@ -58,8 +58,6 @@ table(clin_data$HR_FLAG)
 ## 131 out of 583 events occurred and rest are censored
 clin_data$HR_FLAG <- clin_data$HR_FLAG==TRUE
 
-## explore how many events occurred and how many censored
-
 ## function to check if any NAs present in the data
 nacount <- apply(clin_data, 2, function(x){
   sum(is.na(x))
@@ -85,7 +83,7 @@ clin_data <- clin_data[complete.cases(clin_data),]
 age_sex <- clin_data %>% ggplot(aes(x=agegrp, color=D_Gender, fill=D_Gender))+geom_bar()+
   ggtitle("Age distribution by gender")+xlab("Age group [years]")+ylab("Number of subjects")+theme_minimal()
 
-## Kaplan-Meier curve for Death events in patients stratified by age and ISS
+## Kaplan-Meier curve for events in patients stratified by age and ISS
 surv_plots <- list()
 fit_iss=survival::survfit(survival::Surv(D_PFS,HR_FLAG)~D_ISS,data=clin_data)
 iss_plot <- ggsurvplot(fit_iss, pval = TRUE, conf.int = TRUE)
@@ -450,7 +448,7 @@ ggsurvplot(fit_csg, pval = T, conf.int = T)
 saveRDS(rforestsrc, "pred_model.rds")
 
 
-############################
+#########################
 ## DO NOT RUN
 ############################
 
@@ -459,5 +457,5 @@ saveRDS(rforestsrc, "pred_model.rds")
 pred_model <- readRDS("pred_model.rds")
 print(super_model)
 # make a predictions on "new data" using the final model
-final_predictions <- predict(pred_model, validation_data)
+final_predictions <- predict(pred_model, validation_data)###
 
