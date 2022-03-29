@@ -27,7 +27,7 @@ The final training dataset contains the following columns:
 "MAX", "NRAS", "NSD2", "PHF19", "PRC1", "PRKD2", "TENT5C", "TP53", 
 "TRAF3", "UBR5" 
 
-* Target variables: D_PFS, HR_FLAG  
+* Target variables: D_PFS, HR_FLAG (Note: HR_FLAG is either TRUE for when event occurred or FALSE for when event did not occur or was censored.)
 
 Note: Entrez IDs were converted to Gene Symbols before training. The expression dataset is reshaped so that the gene symbols become column names and the patient IDs are values of a separate column and then the dataset is merged with the clinical dataset using the patient IDs. 
 
