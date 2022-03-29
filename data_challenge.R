@@ -66,6 +66,10 @@ nacount <- as.data.frame(nacount, row.names=names(clin_data))
 nacount <- add_rownames(nacount) %>% dplyr::mutate(percentNA=round(nacount/583*100,2))%>%
   dplyr::filter(percentNA>=0.00)
 
+##plot
+ggplot(nacount, aes(x=rowname, y=percentNA))+geom_col(fill="blue")+coord_flip()+theme_minimal()+
+  ggtitle("Percentage of NAs in each column")
+
 ## remove columns where NAs >50%
 cols_to_remove <- nacount[nacount$percentNA>50,]$rowname
 clin_data <- clin_data[, !(names(clin_data) %in% cols_to_remove)]

@@ -56,9 +56,9 @@ myfillcolors=c("#d10c0c","grey10","#1e6651","#213989","#5b431a","purple","#393f0
 ```
 
 ### Clinical data exploration
-#### 1. Prepare data and explore basic demographics
+#### 1. Prepare and explore data 
 
-```{r clindata, message=FALSE, warning=F, echo=T, fig.width=5, fig.height=5, fig.align='center'}
+```{r clindata, message=FALSE, warning=F, echo=T, fig.height=5, fig.width=10}
 clin_data <- read.csv("sc3_Training_ClinAnnotations.csv")
 
 ## group age into bins for visualization purposes
@@ -77,6 +77,7 @@ nacount <- as.data.frame(nacount, row.names=names(clin_data))
 nacount <- add_rownames(nacount) %>% dplyr::mutate(percentNA=round(nacount/583*100,2))%>%
   dplyr::filter(percentNA>=0.00)
 
+
 ## remove columns where NAs >50%
 cols_to_remove <- nacount[nacount$percentNA>50,]$rowname
 clin_data <- clin_data[, !(names(clin_data) %in% cols_to_remove)]
@@ -88,11 +89,21 @@ clin_data <- clin_data[, -c(1, 5:6, 8, 10:11,13:17)]
 ## remove NAs (only 20 in D_ISS column)
 clin_data <- clin_data[complete.cases(clin_data),]
 
+##plot % NAs
+p <-ggplot(nacount, aes(x=rowname, y=percentNA))+geom_col(fill="blue")+coord_flip()+theme_minimal()+
+  ggtitle("Percentage of NAs in each column")
+
 ## age by gender distribution plot
-clin_data %>% ggplot(aes(x=agegrp, color=D_Gender, fill=D_Gender))+geom_bar()+
+q <- clin_data %>% ggplot(aes(x=agegrp, color=D_Gender, fill=D_Gender))+geom_bar()+
   ggtitle("Age distribution by gender")+xlab("Age group [years]")+ylab("Number of subjects")+theme_minimal()
 
+
+
+grid.arrange(p,q, ncol=2)
+
 ```
+
+Data is checked for any missing values. Columns with more than 50% NAs are excluded from the analysis. For columns with less than 50% NAs (D_ISS), the corresponding observations with NAs are excluded. In the age by sex distribution plot it is observed that most subjects belong to middle to old age groups (50-80 years old) and there are more males than females in the dataset.
 
 #### 2. Explore effect of factors like age and ISS on PFS 
 
